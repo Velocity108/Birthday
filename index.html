@@ -3,149 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <title>Miraah's Fun Zone 💖</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
     <style>
-        /* Basic Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Body Styling - Dark Background */
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh; /* Full viewport height */
-            background-color: #0a0a0a; /* Dark background */
-            font-family: 'Poppins', sans-serif; /* Apply modern font */
-            overflow: hidden; /* Hide potential overflows */
-        }
-
-        /* Container for the text */
-        .neon-container {
-            text-align: center;
-            padding: 20px;
-        }
-
-        /* Styling for each letter span */
-        .letter {
-            font-size: 5vw; /* Responsive font size */
-            font-weight: 700;
-            color: #fff; /* Base color */
-            display: inline-block; /* Needed for animation/transform */
-            opacity: 0; /* Start hidden */
-            transition: opacity 0.1s ease-in-out; /* Smooth transition for visibility */
-            /* Neon Glow Effect - Pink */
-            text-shadow:
-                0 0 5px #fff,
-                0 0 10px #fff,
-                0 0 15px #ff00ff, /* Neon pink */
-                0 0 20px #ff00ff,
-                0 0 25px #ff00ff,
-                0 0 30px #ff00ff,
-                0 0 35px #ff00ff;
-            /* Animation for appearing */
-            animation: fadeInScale 0.6s ease-out forwards;
-            animation-play-state: paused; /* Start paused, trigger with JS */
-        }
-
-        /* Add a slightly different color for variety if needed */
-        /* .letter:nth-child(3n) {
-             text-shadow:
-                0 0 5px #fff,
-                0 0 10px #fff,
-                0 0 15px #00ffff, /* Neon cyan */
-                /*0 0 20px #00ffff,
-                0 0 25px #00ffff,
-                0 0 30px #00ffff,
-                0 0 35px #00ffff;
-        } */
-
-
-        /* Keyframe animation for fade in and slight scale */
-        @keyframes fadeInScale {
-            0% {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        /* Class added by JS to make letters visible */
-        .letter.visible {
-           opacity: 1;
-           animation-play-state: running; /* Start the animation */
-        }
-
-        /* Ensure spaces are rendered correctly */
-        .letter.space {
-            width: 0.5em; /* Adjust space width as needed */
-             /* Remove shadow from spaces if desired */
-            text-shadow: none;
-            animation: none; /* No animation for spaces */
-            opacity: 1; /* Spaces are immediately "visible" */
-        }
-
-         /* Media query for smaller screens */
-        @media (max-width: 768px) {
-            .letter {
-                font-size: 8vw; /* Larger font size on smaller screens */
-            }
-        }
-         @media (max-width: 480px) {
-            .letter {
-                font-size: 10vw; /* Even larger on very small screens */
-            }
-        }
-
+        html, body { min-height: 100vh; margin: 0; padding: 0; box-sizing: border-box; }
+        *, *::before, *::after { box-sizing: inherit; }
+        body { font-family: 'Mochiy Pop P One', sans-serif; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%); color: #5b5b5b; transition: background 0.5s ease-in-out, justify-content 0s, align-items 0s; }
+        #page1Container { display: flex; justify-content: center; align-items: center; width: 100%; padding: 1rem; }
+        .game-container { text-align: center; padding: 40px; background-color: rgba(255, 255, 255, 0.85); border-radius: 25px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); border: 2px solid #ffffff; max-width: 500px; width: 90%; }
+        .game-button { font-family: 'Mochiy Pop P One', sans-serif; padding: 15px 30px; margin: 10px; border: none; border-radius: 15px; cursor: pointer; font-size: 16px; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); text-shadow: 1px 1px 2px rgba(0,0,0,0.1); display: inline-block; vertical-align: middle; flex-shrink: 0; }
+        .yes-button { background-color: #fecaca; color: #fff; border-bottom: 4px solid #fca5a5; }
+        .yes-button:hover { background-color: #fca5a5; box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); transform: translateY(-3px) scale(1.05); }
+        .yes-button:active { transform: translateY(1px) scale(1); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); border-bottom-width: 2px; }
+        .no-button { background-color: #a7f3d0; color: #fff; position: absolute; transition: top 0.2s ease-out, left 0.2s ease-out, background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease; border-bottom: 4px solid #6ee7b7; z-index: 10; }
+        .no-button:hover { box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); transform: scale(1.03); }
+        .result-area { margin-top: 30px; }
+        #forwardButton { background-color: #bfdbfe; color: #fff; border-bottom: 4px solid #93c5fd; margin-top: 15px; }
+        #forwardButton:hover { background-color: #93c5fd; box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); transform: translateY(-2px); }
+        #forwardButton:active { transform: translateY(1px); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); border-bottom-width: 2px; }
+        #page1Container h1::before, #page1Container h1::after { content: '✨'; margin: 0 10px; opacity: 0.8; }
+        .game-gif, .result-gif { max-height: 150px; width: auto; margin-left: auto; margin-right: auto; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); display: block; }
+        .game-gif { margin-bottom: 20px; }
+        .result-gif { margin-bottom: 15px; }
+        .button-container { min-height: 5rem; width: 100%; }
+        #page2Container { display: none; width: 100%; min-height: 100vh; padding-top: 2rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 2rem; flex-direction: column; align-items: center; font-family: 'Inter', sans-serif; }
+        .page2-background { background-image: url('https://assets.onecompiler.app/43etahknn/43f6b72yv/1000022293.png'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; overflow-x: hidden; overflow-y: auto; justify-content: flex-start !important; align-items: stretch !important; }
+        .slide-from-left { transform: translateX(-110%) rotate(-45deg); opacity: 0; }
+        .slide-from-right { transform: translateX(110%) rotate(45deg); opacity: 0; }
+        .slide-in { transform: translateX(0) rotate(var(--initial-rotate, 0deg)); opacity: 1; }
+        .draggable { position: relative; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; z-index: 10; width: 12rem; overflow: hidden; border-radius: 0.5rem; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); background-color: white; padding: 0.5rem; border-width: 8px; border-color: white; transition: all 1s cubic-bezier(0.68, -0.55, 0.27, 1.55); }
+        .dragging { cursor: grabbing; z-index: 20; transition: none !important; }
+        #imageWrapper1 { --initial-rotate: -3deg; }
+        #imageWrapper2 { --initial-rotate: 5deg; }
+        .image-flex-container { display: flex; flex-direction: column; gap: 1.5rem; justify-content: center; align-items: center; position: relative; width: 100%; margin-top: 2rem; }
+        @media (min-width: 768px) { .image-flex-container { flex-direction: row; } }
     </style>
 </head>
 <body>
-    <div class="neon-container" id="text-container">
+<div id="page1Container">
+    <div class="game-container">
+        <div id="initialContent">
+            <img src="https://assets.onecompiler.app/43etahknn/43f6b72yv/1000022290.gif" alt="Cute animated character waving" class="game-gif" onerror="this.style.display='none'">
+            <h1 class="text-2xl mb-6">Is Miraah an Idiot?</h1>
+            <div class="button-container relative flex justify-center items-center h-20 pr-10">
+                <button id="yesButton" class="game-button yes-button mr-4">YES 💖</button>
+                <button id="noButton" class="game-button no-button">NO 🙅‍♀️</button>
+            </div>
         </div>
-
-    <script>
-        // The text to display
-        const text = "Happy Birthday Miraah";
-        // The container element
-        const container = document.getElementById('text-container');
-        // Delay between each letter appearing (in milliseconds)
-        const delay = 100; // 0.1 seconds
-
-        // Split the text into characters
-        const letters = text.split('');
-
-        // Loop through each character
-        letters.forEach((char, index) => {
-            // Create a span element for the character
-            const span = document.createElement('span');
-            span.textContent = char;
-            span.classList.add('letter'); // Add base class
-
-            // If the character is a space, add a specific class
-            if (char === ' ') {
-                span.classList.add('space');
-                 // Render space immediately without delay/animation
-                span.style.opacity = '1'; // Make space visible immediately
-            }
-
-            // Append the span to the container
-            container.appendChild(span);
-
-            // Don't apply timed visibility to spaces if they are handled separately
-            if (char !== ' ') {
-                 // Use setTimeout to make each letter visible after a delay
-                setTimeout(() => {
-                    span.classList.add('visible');
-                }, index * delay); // Stagger the appearance
-            }
-        });
-    </script>
+        <div id="resultContent" class="result-area hidden">
+            <img id="secondGif" src="https://assets.onecompiler.app/43etahknn/43f6b72yv/1000022291.gif" alt="Cute animated character celebrating" class="result-gif hidden" onerror="this.style.display='none'">
+            <button id="forwardButton" class="game-button hidden">ALRIGHT LET'S MOVE FORWARD 🎉</button>
+        </div>
+    </div>
+</div>
+<div id="page2Container" class="hidden">
+    <div class="w-full max-w-2xl mx-auto">
+        <div class="image-flex-container">
+            <div id="imageWrapper1" class="draggable slide-from-left">
+                 <img id="image1" src="https://assets.onecompiler.app/43etahknn/43ey8gb7c/1000022040.jpg" alt="Baby Miraah 1" class="block w-full h-auto rounded-sm pointer-events-none" onerror="this.onerror=null; this.src='https://placehold.co/192x144/cccccc/ffffff?text=Image+1+Error';">
+                 <div class="flex justify-around items-center mt-1 px-1 text-gray-600">
+                     <span class="flex items-center gap-1 cursor-pointer hover:text-pink-500"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" /></svg><span class="text-xs font-medium">1.2k</span></span>
+                     <span class="flex items-center gap-1 cursor-pointer hover:text-blue-500"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" /></svg><span class="text-xs font-medium">345</span></span>
+                 </div>
+            </div>
+            <div id="imageWrapper2" class="draggable slide-from-right">
+                 <img id="image2" src="https://assets.onecompiler.app/43etahknn/43ey8gb7c/1000022050.jpg" alt="Baby Miraah 2" class="block w-full h-auto rounded-sm pointer-events-none" onerror="this.onerror=null; this.src='https://placehold.co/192x144/cccccc/ffffff?text=Image+2+Error';">
+                 <div class="flex justify-around items-center mt-1 px-1 text-gray-600">
+                      <span class="flex items-center gap-1 cursor-pointer hover:text-pink-500"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" /></svg><span class="text-xs font-medium">870</span></span>
+                      <span class="flex items-center gap-1 cursor-pointer hover:text-blue-500"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" /></svg><span class="text-xs font-medium">102</span></span>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+const page1Container=document.getElementById('page1Container');const page2Container=document.getElementById('page2Container');const yesButton=document.getElementById('yesButton');const noButton=document.getElementById('noButton');const forwardButton=document.getElementById('forwardButton');const buttonContainer=document.querySelector('.button-container');const initialContentDiv=document.getElementById('initialContent');const resultContentDiv=document.getElementById('resultContent');const secondGif=document.getElementById('secondGif');const gameContainer=document.querySelector('.game-container');const imageWrapper1=document.getElementById('imageWrapper1');const imageWrapper2=document.getElementById('imageWrapper2');let isPage2Active=!1;
+function positionNoButtonInitially(){if(isPage2Active||!yesButton||!noButton||!buttonContainer)return;if(buttonContainer.offsetWidth===0||!yesButton.offsetParent){requestAnimationFrame(positionNoButtonInitially);return}noButton.style.position='absolute';noButton.style.display='';noButton.style.transform='none';let leftPos=yesButton.offsetLeft+yesButton.offsetWidth+10;let topPos=yesButton.offsetTop;const noButtonWidth=noButton.offsetWidth;const noButtonHeight=noButton.offsetHeight;const containerWidth=buttonContainer.clientWidth;const containerHeight=buttonContainer.clientHeight;const padding=5;if(leftPos+noButtonWidth>containerWidth-padding){leftPos=containerWidth-noButtonWidth-padding}if(leftPos<yesButton.offsetLeft+yesButton.offsetWidth+padding){let leftBefore=yesButton.offsetLeft-noButtonWidth-10;if(leftBefore>=padding){leftPos=leftBefore}else{leftPos=yesButton.offsetLeft+yesButton.offsetWidth+padding}}if(leftPos<padding){leftPos=padding}if(topPos<padding){topPos=padding}if(topPos+noButtonHeight>containerHeight-padding){topPos=containerHeight-noButtonHeight-padding}if(topPos<padding){topPos=padding}noButton.style.left=leftPos+'px';noButton.style.top=topPos+'px'}
+yesButton.addEventListener('click',()=>{if(isPage2Active)return;initialContentDiv.classList.add('hidden');resultContentDiv.classList.remove('hidden');secondGif.classList.remove('hidden');forwardButton.classList.remove('hidden');noButton.style.display='none'});
+function moveNoButton(){if(isPage2Active||!noButton||!yesButton||!gameContainer)return;const noButtonWidth=noButton.offsetWidth;const noButtonHeight=noButton.offsetHeight;const gameRect=gameContainer.getBoundingClientRect();const buffer=10;const minLeft=gameRect.left+buffer;const maxLeft=gameRect.right-noButtonWidth-buffer;const minTop=gameRect.top+buffer;const maxTop=gameRect.bottom-noButtonHeight-buffer;if(minLeft>=maxLeft||minTop>=maxTop){moveNoButtonViewport();return}let randomTop,randomLeft;let overlap=!1;let retries=0;const maxRetries=30;const yesRect=yesButton.getBoundingClientRect();do{randomLeft=minLeft+Math.random()*(maxLeft-minLeft);randomTop=minTop+Math.random()*(maxTop-minTop);const noLeft=randomLeft;const noTop=randomTop;const noRight=noLeft+noButtonWidth;const noBottom=noTop+noButtonHeight;overlap=(noLeft<yesRect.right&&noRight>yesRect.left&&noTop<yesRect.bottom&&noBottom>yesRect.top);retries++}while(overlap&&retries<maxRetries);if(overlap){moveNoButtonViewport();return}noButton.style.position='fixed';noButton.style.top=`${randomTop}px`;noButton.style.left=`${randomLeft}px`;noButton.style.transform='none'}
+function moveNoButtonViewport(){if(isPage2Active||!noButton||!yesButton)return;const noButtonWidth=noButton.offsetWidth;const noButtonHeight=noButton.offsetHeight;const maxWidth=window.innerWidth-noButtonWidth-20;const maxHeight=window.innerHeight-noButtonHeight-20;let randomTop,randomLeft;let overlap=!1;let retries=0;const maxRetries=20;const yesRect=yesButton.getBoundingClientRect();do{randomTop=Math.max(10,Math.random()*maxHeight);randomLeft=Math.max(10,Math.random()*maxWidth);const noTop=randomTop;const noLeft=randomLeft;const noRight=noLeft+noButtonWidth;const noBottom=noTop+noButtonHeight;overlap=(noLeft<yesRect.right&&noRight>yesRect.left&&noTop<yesRect.bottom&&noBottom>yesRect.top);retries++}while(overlap&&retries<maxRetries);if(overlap){randomTop=20;randomLeft=20}noButton.style.position='fixed';noButton.style.top=`${randomTop}px`;noButton.style.left=`${randomLeft}px`;noButton.style.transform='none'}
+noButton.addEventListener('mouseover',moveNoButton);noButton.addEventListener('click',moveNoButton);
+forwardButton.addEventListener('click',()=>{if(isPage2Active)return;isPage2Active=!0;page1Container.style.transition='opacity 0.5s ease-out';page1Container.style.opacity='0';document.body.classList.add('page2-background');document.body.style.fontFamily="'Inter', sans-serif";setTimeout(()=>{page1Container.style.display='none';page2Container.style.display='flex';page2Container.style.opacity='0';requestAnimationFrame(()=>{page2Container.style.transition='opacity 0.5s ease-in';page2Container.style.opacity='1';initializePage2()})},500)});
+function initializePage2(){if(imageWrapper1&&imageWrapper2){imageWrapper1.classList.remove('slide-in');imageWrapper2.classList.remove('slide-in');imageWrapper1.classList.add('slide-from-left');imageWrapper2.classList.add('slide-from-right');requestAnimationFrame(()=>{setTimeout(()=>{imageWrapper1.classList.remove('slide-from-left');imageWrapper1.classList.add('slide-in');imageWrapper2.classList.remove('slide-from-right');imageWrapper2.classList.add('slide-in');setTimeout(()=>{const finalRotation1=getComputedStyle(imageWrapper1).getPropertyValue('--initial-rotate').trim()||'0deg';const finalRotation2=getComputedStyle(imageWrapper2).getPropertyValue('--initial-rotate').trim()||'0deg';if(!imageWrapper1.dataset.draggableInitialized){makeDraggable(imageWrapper1,finalRotation1);imageWrapper1.dataset.draggableInitialized='true'}if(!imageWrapper2.dataset.draggableInitialized){makeDraggable(imageWrapper2,finalRotation2);imageWrapper2.dataset.draggableInitialized='true'}},1000)},50)})}else{console.error("Image wrappers not found for Page 2 initialization.")}}
+function makeDraggable(element,finalRotation){let isDragging=!1;let startX,startY;let initialTranslateX=0,initialTranslateY=0;let currentTranslateX=0,currentTranslateY=0;function getCoords(e){if(e.type.startsWith('touch')&&e.changedTouches&&e.changedTouches.length>0){return{x:e.changedTouches[0].clientX,y:e.changedTouches[0].clientY}}if(e.touches&&e.touches.length>0){return{x:e.touches[0].clientX,y:e.touches[0].clientY}}return{x:e.clientX,y:e.clientY}}function dragStart(e){isDragging=!0;element.classList.add('dragging');const coords=getCoords(e);startX=coords.x;startY=coords.y;const style=window.getComputedStyle(element);const matrix=new DOMMatrixReadOnly(style.transform);initialTranslateX=matrix.m41;initialTranslateY=matrix.m42;currentTranslateX=initialTranslateX;currentTranslateY=initialTranslateY;document.addEventListener('mousemove',dragMove);document.addEventListener('touchmove',dragMove,{passive:!1});document.addEventListener('mouseup',dragEnd);document.addEventListener('touchend',dragEnd);document.addEventListener('mouseleave',dragEnd)}function dragMove(e){if(!isDragging)return;if(e.type==='touchmove')e.preventDefault();const coords=getCoords(e);const deltaX=coords.x-startX;const deltaY=coords.y-startY;currentTranslateX=initialTranslateX+deltaX;currentTranslateY=initialTranslateY+deltaY;element.style.transform=`translate(${currentTranslateX}px, ${currentTranslateY}px) rotate(${finalRotation})`}function dragEnd(e){if(!isDragging)return;isDragging=!1;element.classList.remove('dragging');document.removeEventListener('mousemove',dragMove);document.removeEventListener('touchmove',dragMove);document.removeEventListener('mouseup',dragEnd);document.addEventListener('touchend',dragEnd);document.removeEventListener('mouseleave',dragEnd);initialTranslateX=currentTranslateX;initialTranslateY=currentTranslateY}element.addEventListener('mousedown',dragStart);element.addEventListener('touchstart',dragStart,{passive:!0})}
+window.addEventListener('load',()=>{requestAnimationFrame(positionNoButtonInitially)});
+window.addEventListener('resize',()=>{if(!isPage2Active&&noButton&&initialContentDiv&&!initialContentDiv.classList.contains('hidden')){noButton.style.display='none';requestAnimationFrame(()=>{positionNoButtonInitially();if(!isPage2Active&&!initialContentDiv.classList.contains('hidden')){noButton.style.display=''}})}});
+</script>
 </body>
 </html>
